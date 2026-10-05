@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -39,9 +36,8 @@ class Program
         return File.ReadAllText(filePath, Encoding.UTF8);
     }
 
-    static (List<string> Words, List<Color> Colors) GetColors(string text)
+    static List<Color> GetColors(string text)
     {
-        var wordsList = new List<string>();
         var colorsList = new List<Color>();
 
         var matches = Regex.Matches(text, @"\b[\p{IsCyrillic}a-zA-Z]+\b");
@@ -54,14 +50,13 @@ class Program
             {
                 if (word.StartsWith(kvp.Key, StringComparison.OrdinalIgnoreCase))
                 {
-                    wordsList.Add(word);
                     colorsList.Add(kvp.Value);
                     break;
                 }
             }
         }
 
-        return (wordsList, colorsList);
+        return colorsList;
     }
 
     static void CreateBookPortrait(List<Color> colors, string outputPath, int columns = 0)
@@ -102,7 +97,7 @@ class Program
 
     static void Main(string[] args)
     {
-        string inputFilePath = "Podarok.txt";
+        string inputFilePath = "Aeroport.txt";
         string outputImagePath = "portrait.png";
 
         if (!File.Exists(inputFilePath))
@@ -113,7 +108,7 @@ class Program
 
         string text = GetText(inputFilePath);
 
-        var (words, colors) = GetColors(text);
+        List<Color> colors = GetColors(text);
 
         Console.WriteLine($"Найдено цветовых упоминаний: {colors.Count}");
 
