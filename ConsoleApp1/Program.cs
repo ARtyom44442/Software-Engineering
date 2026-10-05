@@ -46,12 +46,13 @@ class Program
         {
             string word = match.Value;
 
-            foreach (var kvp in ColorMap)
+            foreach (var item in ColorMap)
             {
-                if (word.StartsWith(kvp.Key, StringComparison.OrdinalIgnoreCase))
+                if (word.StartsWith(item.Key, StringComparison.OrdinalIgnoreCase))
                 {
-                    colorsList.Add(kvp.Value);
+                    colorsList.Add(item.Value);
                     break;
+
                 }
             }
         }
