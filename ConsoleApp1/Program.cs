@@ -40,7 +40,7 @@ class Program
     {
         var colorsList = new List<Color>();
 
-        var matches = Regex.Matches(text, @"\b[\p{IsCyrillic}a-zA-Z]+\b");
+        var matches = Regex.Matches(text, @"\b[\p{IsCyrillic}]+\b");
 
         foreach (Match match in matches)
         {
